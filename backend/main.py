@@ -14,8 +14,8 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-# Import routers (will create these next)
-# from routers import videos, annotations, training, inference, desktop
+# Import routers
+from routers import videos, annotations
 
 # Create FastAPI app
 app = FastAPI(
@@ -80,12 +80,12 @@ async def test_supabase_connection():
             content={"status": "error", "message": str(e)}
         )
 
-# Register routers (uncomment as we create them)
-# app.include_router(videos.router)
-# app.include_router(annotations.router)
-# app.include_router(training.router)
-# app.include_router(inference.router)
-# app.include_router(desktop.router)
+# Register routers
+app.include_router(videos.router)
+app.include_router(annotations.router)
+# app.include_router(training.router)  # TODO: Create training router
+# app.include_router(inference.router)  # TODO: Create inference router
+# app.include_router(desktop.router)  # TODO: Create desktop router
 
 # Startup event
 @app.on_event("startup")
